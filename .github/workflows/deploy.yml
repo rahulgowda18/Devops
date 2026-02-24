@@ -21,16 +21,16 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Backend Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mean-backend ./backend
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mean-backend:latest ./backend
 
       - name: Build Frontend Image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mean-frontend ./frontend
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/mean-frontend:latest ./frontend
 
       - name: Push Backend Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mean-backend
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/mean-backend:latest
 
       - name: Push Frontend Image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/mean-frontend
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/mean-frontend:latest
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.6
@@ -39,6 +39,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd Devops
+            cd ~/Devops
             docker-compose pull
+            docker-compose down
             docker-compose up -d

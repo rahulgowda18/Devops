@@ -1,12 +1,15 @@
 version: "3.8"
 
 services:
+
   mongodb:
     image: mongo:6
     container_name: mongodb
     restart: always
     volumes:
-      - mongo-data:/data/db
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
 
   backend:
     build: ./backend
@@ -15,7 +18,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/cruddb
+      - MONGO_URL=mongodb://mongodb:27017/devops_db
     depends_on:
       - mongodb
 
@@ -23,11 +26,10 @@ services:
     build: ./frontend
     container_name: frontend
     restart: always
-    expose:
-      - "80"
+    ports:
+      - "3000:80"
     depends_on:
       - backend
 
 volumes:
-  mongo-data:
-    driver: local
+  mongo_data:
