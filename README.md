@@ -30,9 +30,12 @@ Restarts containers automatically
 🌐 Nginx Reverse Proxy
 
 Only port 80 exposed
-
 Routes:
 
 / → Frontend
 
 /api → Backend
+
+Snapshots:
+<img width="1550" height="455" alt="Screenshot 2026-02-25 002116" src="https://github.com/user-attachments/assets/177c6abe-b033-44fa-b944-ceaf07170b44" />
+<img width="1386" height="731" alt="Screenshot 2026-02-25 002129" src="https://github.com/user-attachments/assets/4709e8f1-a76e-472d-aa2a-5bef646a8df2" />
